@@ -1,13 +1,20 @@
 import { DockviewApi } from "dockview";
 import { v4 } from "uuid";
 
-export const createDefaultLayout = (api: DockviewApi) => {
+export const splitLayoutHorizontal = (
+  referencePanel: string,
+  api: DockviewApi
+) => {
   const panel = api.addPanel({
     id: v4(),
     component: "default",
     title: "",
     params: {
       title: "",
+    },
+    position: {
+      referencePanel,
+      direction: "below",
     },
   });
 

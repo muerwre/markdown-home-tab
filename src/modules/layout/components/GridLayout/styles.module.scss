@@ -1,0 +1,11 @@
+.layout {
+  :global {
+    .vertical .sash {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .horizontal .sash {
+      border-right: 1px solid var(--color-border);
+    }
+  }
+}
