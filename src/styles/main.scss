@@ -1,0 +1,12 @@
+@import "dockview/dist/styles/dockview.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
