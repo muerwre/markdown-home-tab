@@ -1,6 +1,23 @@
 # Markdown Extension
 
-I'm trying to create markdown new tab extension with [Milkdown](https://milkdown.dev/) and
+Markdown Editor for new tab made with [Milkdown](https://milkdown.dev/) and
 [Dockview](https://dockview.dev).
 
-Now its only experiment, but it already handles grid layout and data persistance.
+## Installation
+
+```
+yarn 
+yarn build
+cd ./dist
+web-ext build
+```
+
+## Development
+
+The live server will be started, so you can see all changes in a realtime.
+
+```
+yarn
+yarn dev
+```
+

@@ -433,6 +433,18 @@
     lodash.debounce "^4.0.8"
     tslib "^2.5.0"
 
+"@milkdown/plugin-tooltip@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@milkdown/plugin-tooltip/-/plugin-tooltip-7.2.1.tgz#4eadd87b595d5472b427a5e1a00177a9360f12c2"
+  integrity sha512-JUcZ23PHFY+arWRRsX/YgQRcIEwQZ6UpgxAAy5fBpLiEa7xcpPeOKviEYExIQfYdUcd2yBKm3xcsC3URv1CEdA==
+  dependencies:
+    "@milkdown/exception" "7.2.1"
+    "@milkdown/utils" "7.2.1"
+    "@types/lodash.debounce" "^4.0.7"
+    lodash.debounce "^4.0.8"
+    tippy.js "^6.3.7"
+    tslib "^2.5.0"
+
 "@milkdown/preset-commonmark@^7.2.1":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@milkdown/preset-commonmark/-/preset-commonmark-7.2.1.tgz#c42c036c91239ec1d3998212a1aa08f14037babc"
@@ -525,6 +537,11 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@popperjs/core@^2.9.0":
+  version "2.11.7"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.7.tgz#ccab5c8f7dc557a52ca3288c10075c9ccd37fff7"
+  integrity sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==
 
 "@rollup/pluginutils@^5.0.2":
   version "5.0.2"
@@ -2403,6 +2420,13 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+
+tippy.js@^6.3.7:
+  version "6.3.7"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-6.3.7.tgz#8ccfb651d642010ed9a32ff29b0e9e19c5b8c61c"
+  integrity sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==
+  dependencies:
+    "@popperjs/core" "^2.9.0"
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
