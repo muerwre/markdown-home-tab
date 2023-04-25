@@ -11,6 +11,7 @@ export const splitLayoutVertical = (
     title: "",
     params: {
       title: "",
+      locked: false,
     },
     position: {
       referencePanel,

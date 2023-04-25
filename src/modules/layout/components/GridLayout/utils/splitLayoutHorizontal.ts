@@ -11,6 +11,7 @@ export const splitLayoutHorizontal = (
     title: "",
     params: {
       title: "",
+      locked: false,
     },
     position: {
       referencePanel,

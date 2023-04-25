@@ -1,5 +1,5 @@
 import { DockviewApi, DockviewReadyEvent } from "dockview";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { createDefaultLayout } from "../utils/createDefaultLayout";
 
 export const useGridLayoutPersistance = () => {
@@ -24,12 +24,22 @@ export const useGridLayoutPersistance = () => {
     }
   };
 
+  const persistLayout = useCallback(() => {
+    if (!api.current) {
+      return;
+    }
+
+    const layout = api.current.toJSON();
+
+    localStorage.setItem("dockview_persistance_layout", JSON.stringify(layout));
+  }, []);
+
   useEffect(() => {
     if (!api.current) {
       return;
     }
 
-    const disposable = api.current.onDidLayoutChange(() => {
+    const onLayoutChange = api.current.onDidLayoutChange(() => {
       if (!api.current) {
         return;
       }
@@ -38,18 +48,19 @@ export const useGridLayoutPersistance = () => {
         createDefaultLayout(api.current);
       }
 
-      const layout = api.current.toJSON();
+      persistLayout();
+    });
 
-      localStorage.setItem(
-        "dockview_persistance_layout",
-        JSON.stringify(layout)
-      );
+    const onPanelChange = api.current.onDidActivePanelChange((event) => {
+      console.log(event);
     });
 
     return () => {
-      disposable.dispose();
+      onLayoutChange.dispose();
+      onPanelChange.dispose();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [persistLayout, api.current]);
 
-  return { api, onReady };
+  return { api, onReady, persistLayout };
 };

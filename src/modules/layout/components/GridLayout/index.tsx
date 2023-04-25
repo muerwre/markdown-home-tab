@@ -1,6 +1,6 @@
 import { DockviewReact, IDockviewPanelProps } from "dockview";
 import { useGridLayoutPersistance } from "./hooks/useGridLayoutPersistance";
-import { FC, createElement, useCallback, useMemo } from "react";
+import { FC, createElement, useCallback, useEffect, useMemo } from "react";
 import { GridLayoutComponentProps } from "../../types";
 import { GridLayoutItemWrapper } from "../GridLayoutItemWrapper";
 import { splitLayoutVertical } from "./utils/splitLayoutVertical";
@@ -12,10 +12,16 @@ export interface GridLayoutProps {
 }
 
 interface DefaultLayoutProps {
-  panelProps: IDockviewPanelProps<{ title: string }>;
+  panelProps: IDockviewPanelProps<{ title: string; locked?: boolean }>;
   component: FC<GridLayoutComponentProps>;
+  persistLayout: () => void;
 }
-const DefaultLayout = ({ component, panelProps }: DefaultLayoutProps) => {
+
+const DefaultLayout = ({
+  component,
+  panelProps,
+  persistLayout,
+}: DefaultLayoutProps) => {
   const splitVertical = useCallback(() => {
     splitLayoutVertical(panelProps.api.id, panelProps.containerApi);
   }, [panelProps.api.id, panelProps.containerApi]);
@@ -28,27 +34,47 @@ const DefaultLayout = ({ component, panelProps }: DefaultLayoutProps) => {
     panelProps.api.close();
   }, [panelProps.api]);
 
+  const locked = Boolean(panelProps.params.locked);
+
+  const lock = useCallback(() => {
+    panelProps.api.updateParameters({
+      ...panelProps.params,
+      locked: !locked,
+    });
+  }, [locked, panelProps.api, panelProps.params]);
+
+  useEffect(() => {
+    persistLayout();
+  }, [locked, persistLayout]);
+
   return (
     <GridLayoutItemWrapper
       splitVertical={splitVertical}
       splitHorizontal={splitHorizontal}
       remove={remove}
+      locked={locked}
+      lock={lock}
     >
       {createElement(component, {
         id: panelProps.api.id,
         title: panelProps.params.title,
+        locked,
       })}
     </GridLayoutItemWrapper>
   );
 };
 
 export const GridLayout: FC<GridLayoutProps> = ({ component }) => {
-  const { onReady } = useGridLayoutPersistance();
+  const { onReady, persistLayout } = useGridLayoutPersistance();
 
   const components = useMemo(
     () => ({
       default: (props: IDockviewPanelProps<{ title: string }>) => (
-        <DefaultLayout panelProps={props} component={component} />
+        <DefaultLayout
+          panelProps={props}
+          component={component}
+          persistLayout={persistLayout}
+        />
       ),
     }),
     [component]

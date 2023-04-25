@@ -12,11 +12,3 @@
     margin-right: 0 !important;
   }
 }
-
-div[data-milkdown-root="true"] {
-  height: 100%;
-
-  :global(.milkdown) {
-    height: 100%;
-  }
-}

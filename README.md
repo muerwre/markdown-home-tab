@@ -6,7 +6,7 @@ Markdown Editor for new tab made with [Milkdown](https://milkdown.dev/) and
 ## Installation
 
 ```
-yarn 
+yarn
 yarn build
 cd ./dist
 web-ext build
@@ -21,3 +21,6 @@ yarn
 yarn dev
 ```
 
+## TO-DO
+
+- Use Remirror as editor

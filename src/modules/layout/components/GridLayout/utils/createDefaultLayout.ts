@@ -8,6 +8,7 @@ export const createDefaultLayout = (api: DockviewApi) => {
     title: "",
     params: {
       title: "",
+      locked: false,
     },
   });
 
