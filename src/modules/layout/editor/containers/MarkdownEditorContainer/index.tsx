@@ -11,7 +11,7 @@ interface MarkdownEditorContainerProps {
 export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   id,
 }) => {
-  const [value, setValue] = usePersistedValue(id);
+  const [value, setValue] = usePersistedValue(id, "MarkdownEditorContainer");
 
   return (
     <div className={styles.editor}>

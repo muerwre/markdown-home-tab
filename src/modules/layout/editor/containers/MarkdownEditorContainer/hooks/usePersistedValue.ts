@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-const prefix = "VALUE__";
-
 const safelyGetStringValue = (key: string) => {
   try {
     return localStorage.getItem(key) ?? "";
@@ -19,7 +17,8 @@ const safelySetStringValue = (key: string, value: string) => {
 };
 
 export const usePersistedValue = (
-  id: string
+  id: string,
+  prefix: string
 ): [string, (val: string) => void] => {
   const key = `${prefix}${id}`;
   const [value, setValue] = useState(safelyGetStringValue(key));

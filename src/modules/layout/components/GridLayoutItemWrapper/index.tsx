@@ -1,5 +1,12 @@
 import { FC, PropsWithChildren } from "react";
 import styles from "./styles.module.scss";
+import { IconButton } from "~/components/buttons/IconButton";
+
+import DeleteIcon from "~/assets/images/delete.svg";
+import SplitVertical from "~/assets/images/split-vertical.svg";
+import SplitHorizontal from "~/assets/images/split-horizontal.svg";
+
+console.log(DeleteIcon);
 
 type GridLayoutItemWrapperProps = PropsWithChildren & {
   splitVertical: () => void;
@@ -15,15 +22,23 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.menu}>
-      <button onClick={splitVertical} role="button">
-        v
-      </button>
-      <button onClick={splitHorizontal} role="button">
-        h
-      </button>
-      <button onClick={remove} role="button">
-        d
-      </button>
+      <IconButton
+        onClick={splitVertical}
+        role="button"
+        className={styles.button}
+      >
+        <SplitVertical />
+      </IconButton>
+      <IconButton
+        onClick={splitHorizontal}
+        role="button"
+        className={styles.button}
+      >
+        <SplitHorizontal />
+      </IconButton>
+      <IconButton onClick={remove} role="button" className={styles.button}>
+        <DeleteIcon />
+      </IconButton>
     </div>
 
     {children}

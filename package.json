@@ -19,13 +19,16 @@
     "@milkdown/react": "^7.2.1",
     "@milkdown/theme-nord": "^7.2.1",
     "@milkdown/transformer": "^7.2.1",
+    "classnames": "^2.3.2",
     "dockview": "^1.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.62.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vite-plugin-svgr": "^2.4.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.1",
