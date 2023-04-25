@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "package": "yarn build && cd dist && web-ext build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -26,7 +27,8 @@
     "react-dom": "^18.2.0",
     "sass": "^1.62.0",
     "uuid": "^9.0.0",
-    "vite-plugin-svgr": "^2.4.0"
+    "vite-plugin-svgr": "^2.4.0",
+    "web-ext": "^7.6.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
