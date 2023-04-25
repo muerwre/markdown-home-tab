@@ -1,6 +1,17 @@
+.wrapper {
+  height: 100%;
+  box-sizing: border-box;
+
+  & > :global(.remirror-editor-wrapper) {
+    height: 100%;
+    box-sizing: border-box;
+  }
+}
+
 .editor {
   outline: none;
   height: 100%;
+  box-sizing: border-box;
 
   & > :first-child {
     margin-top: 0 !important;

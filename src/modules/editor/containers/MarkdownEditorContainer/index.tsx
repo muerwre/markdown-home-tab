@@ -1,7 +1,8 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import { ReactMarkdownEditor } from "../../components/ReactMarkdownEditor";
+import { ReactMarkdownViewer } from "../../components/ReactMarkdownViewer";
 import { usePersistedValue } from "./hooks/usePersistedValue";
-import { RemirrorEditor } from "../../components/RemirrorEditor";
+import styles from "./styles.module.scss";
 
 interface MarkdownEditorContainerProps {
   id: string;
@@ -16,7 +17,19 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
 
   return (
     <div className={styles.editor}>
-      <RemirrorEditor value={value} onChange={setValue} locked={locked} />
+      {/*
+      locked ? (
+        <ReactMarkdownViewer value={value} />
+      ) : (
+        <ReactMarkdownEditor value={value} onChange={setValue} />
+      )
+      */}
+      {locked ? (
+        <ReactMarkdownViewer value={value} />
+      ) : (
+        <ReactMarkdownEditor value={value} onChange={setValue} />
+        // <RemirrorEditor value={value} onChange={setValue} locked={locked} />
+      )}
     </div>
   );
 };

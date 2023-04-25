@@ -25,3 +25,25 @@ ul {
     margin: 0.5em 0;
   }
 }
+
+code {
+  background: var(--color-code-background);
+  color: var(--color-code-text);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--color-pre-background);
+  padding: 10px;
+  border-radius: 4px;
+  font-size: inherit;
+
+  code {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+  }
+}

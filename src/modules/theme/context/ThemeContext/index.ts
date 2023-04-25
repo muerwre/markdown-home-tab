@@ -5,6 +5,8 @@ import { FontFamily } from "../../constants/fonts";
 export const defaultTheme = {
   theme: Theme.Dark,
   font: FontFamily.Inter,
+  paddingHorizontal: 16,
+  paddingVertical: 16,
 };
 
 export const ThemeContext = createContext(defaultTheme);

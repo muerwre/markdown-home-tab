@@ -26,27 +26,27 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.menu}>
+      <IconButton
+        onClick={splitVertical}
+        role="button"
+        className={styles.button}
+      >
+        <SplitVertical />
+      </IconButton>
+      <IconButton
+        onClick={splitHorizontal}
+        role="button"
+        className={styles.button}
+      >
+        <SplitHorizontal />
+      </IconButton>
+
       {!locked && (
-        <>
-          <IconButton
-            onClick={splitVertical}
-            role="button"
-            className={styles.button}
-          >
-            <SplitVertical />
-          </IconButton>
-          <IconButton
-            onClick={splitHorizontal}
-            role="button"
-            className={styles.button}
-          >
-            <SplitHorizontal />
-          </IconButton>
-          <IconButton onClick={remove} role="button" className={styles.button}>
-            <DeleteIcon />
-          </IconButton>
-        </>
+        <IconButton onClick={remove} role="button" className={styles.button}>
+          <DeleteIcon />
+        </IconButton>
       )}
+
       <IconButton onClick={lock} role="button" className={styles.button}>
         {locked ? <Locked /> : <Unlocked />}
       </IconButton>

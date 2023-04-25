@@ -3,4 +3,7 @@
   --color-background: #111111;
   --color-text: #ffffff;
   --color-link: #25bfe6;
+  --color-code-text: #ff3344;
+  --color-code-background: #{transparentize(#ff3344, 0.9)};
+  --color-pre-background: #{lighten(#111111, 2%)};
 }

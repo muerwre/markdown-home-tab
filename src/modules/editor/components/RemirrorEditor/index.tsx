@@ -31,6 +31,7 @@ import {
   GapCursorExtension,
 } from "remirror/extensions";
 import styles from "./styles.module.scss";
+import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
 
 interface RemirrorEditorProps {
   locked: boolean;
@@ -63,23 +64,28 @@ const RemirrorEditor: FC<RemirrorEditorProps> = ({
     [onChange, setState]
   );
 
+  const style = useContainerPaddings();
+
   return (
-    <Remirror
-      placeholder="Start typing..."
-      manager={manager}
-      classNames={[styles.editor]}
-      editable={!locked}
-      onChange={onStateChange}
-      state={state}
-    >
-      <EditorComponent />
-      {!locked && (
-        <FloatingToolbar>
-          <FormattingButtonGroup />
-          <HeadingLevelButtonGroup />
-        </FloatingToolbar>
-      )}
-    </Remirror>
+    <div className={styles.wrapper} style={style}>
+      <Remirror
+        placeholder="Start typing..."
+        manager={manager}
+        classNames={[styles.editor]}
+        editable={!locked}
+        onChange={onStateChange}
+        state={state}
+        autoFocus
+      >
+        <EditorComponent />
+        {!locked && (
+          <FloatingToolbar>
+            <FormattingButtonGroup />
+            <HeadingLevelButtonGroup />
+          </FloatingToolbar>
+        )}
+      </Remirror>
+    </div>
   );
 };
 
