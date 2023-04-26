@@ -51,13 +51,8 @@ export const useGridLayoutPersistance = () => {
       persistLayout();
     });
 
-    const onPanelChange = api.current.onDidActivePanelChange((event) => {
-      console.log(event);
-    });
-
     return () => {
       onLayoutChange.dispose();
-      onPanelChange.dispose();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persistLayout, api.current]);

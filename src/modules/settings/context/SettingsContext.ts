@@ -1,10 +1,13 @@
 import { createContext, useContext } from "react";
 
-export type SettingsValue = {
-  richEditorEnabled: boolean;
+export interface ColorSettings {
   backgroundColor: string;
   textColor: string;
   linkColor: string;
+}
+
+export type SettingsValue = ColorSettings & {
+  richEditorEnabled: boolean;
 };
 
 export const defaultSettings: SettingsValue = {

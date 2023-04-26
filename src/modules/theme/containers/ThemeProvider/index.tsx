@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { ThemeContext, defaultTheme } from "../../context/ThemeContext";
 import { useSettings } from "~/modules/settings/context/SettingsContext";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type ThemeProviderProps = PropsWithChildren;
 
@@ -18,15 +19,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     return () => document.body.classList.remove(`theme-${theme.theme}`);
   }, [theme.theme]);
 
-  useEffect(() => {
-    document.body.style.setProperty(
-      "--color-background",
-      settings.backgroundColor
-    );
-
-    document.body.style.setProperty("--color-text", settings.textColor);
-    document.body.style.setProperty("--color-link", settings.linkColor);
-  }, [settings]);
+  useThemeColors(settings);
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>

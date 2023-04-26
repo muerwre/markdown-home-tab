@@ -7,9 +7,22 @@ import {
   defaultSettings,
 } from "../../context/SettingsContext";
 import { ModalPage } from "~/modules/modal/components/ModalPage";
+import { useDetectTheme } from "~/modules/theme/hooks/useDetectTheme";
+import {
+  Theme,
+  defaultDarkTheme,
+  defaultLightTheme,
+} from "~/modules/theme/constants/theme";
 
 const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [settings, setSettings] = useState(defaultSettings);
+  const theme = useDetectTheme();
+  const defaultColors =
+    theme === Theme.Dark ? defaultDarkTheme : defaultLightTheme;
+
+  const [settings, setSettings] = useState({
+    ...defaultSettings,
+    ...defaultColors,
+  });
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 
   const show = useCallback(() => setSettingsModalVisible(true), []);
