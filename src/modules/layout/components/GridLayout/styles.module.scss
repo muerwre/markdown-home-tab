@@ -5,6 +5,12 @@
       position: absolute;
       inset: 1.5px;
       background: var(--color-border);
+      opacity: 0.5;
+      transition: opacity 0.25s;
+    }
+
+    .sash:hover::after {
+      opacity: 1;
     }
   }
 }
