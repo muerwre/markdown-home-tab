@@ -54,9 +54,6 @@ const DefaultLayout = ({
     <GridLayoutItemWrapper
       splitVertical={splitVertical}
       splitHorizontal={splitHorizontal}
-      remove={remove}
-      locked={locked}
-      lock={lock}
       showSettings={showSettings}
     >
       {createElement(component, {
@@ -64,6 +61,7 @@ const DefaultLayout = ({
         title: panelProps.params.title,
         locked,
         startEditing: lock,
+        remove,
       })}
     </GridLayoutItemWrapper>
   );

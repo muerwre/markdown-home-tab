@@ -11,6 +11,7 @@ interface MarkdownEditorContainerProps {
   id: string;
   locked: boolean;
   startEditing: () => void;
+  remove: () => void;
 }
 
 const RichEditor = lazy(() =>
@@ -23,6 +24,7 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   id,
   locked,
   startEditing,
+  remove,
 }) => {
   const {
     settings: { richEditorEnabled },
@@ -39,7 +41,7 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   );
 
   const editor = (
-    <EditorWrapper onSave={startEditing}>
+    <EditorWrapper save={startEditing} remove={remove}>
       {richEditorEnabled ? (
         <RichEditor value={value} onChange={setValue} locked={locked} />
       ) : (

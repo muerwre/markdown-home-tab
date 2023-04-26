@@ -3,4 +3,5 @@ export interface GridLayoutComponentProps {
   title: string;
   locked: boolean;
   startEditing: () => void;
+  remove: () => void;
 }
