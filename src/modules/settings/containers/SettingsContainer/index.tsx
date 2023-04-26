@@ -1,8 +1,10 @@
 import { ChangeEvent, FC, useCallback } from "react";
 import { useSettings } from "../../context/SettingsContext";
+import { useTranslation } from "react-i18next";
 
 const SettingsContainer: FC = () => {
   const { update, settings } = useSettings();
+  const { t } = useTranslation();
 
   const updateBackgroundColor = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +28,10 @@ const SettingsContainer: FC = () => {
 
   return (
     <div>
+      <h2>{t("Colors")}</h2>
+
       <label htmlFor="color">
-        Background
+        {t("Background")}
         <input
           type="color"
           id="color"
@@ -37,7 +41,8 @@ const SettingsContainer: FC = () => {
       </label>
 
       <label htmlFor="color">
-        Text
+        {t("Text")}
+
         <input
           type="color"
           id="color"
@@ -47,7 +52,8 @@ const SettingsContainer: FC = () => {
       </label>
 
       <label htmlFor="color">
-        Link
+        {t("Links")}
+
         <input
           type="color"
           id="color"

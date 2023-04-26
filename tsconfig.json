@@ -23,8 +23,9 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "types": ["./src/vite-env.d.ts", "./src/i18next.d.ts"]
   },
-  "include": ["src"],
+  "include": ["src", "public/locales"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

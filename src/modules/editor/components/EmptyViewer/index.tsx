@@ -1,7 +1,8 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
-import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
+import { useTranslation } from "react-i18next";
 import { Button } from "~/components/buttons/Button";
+import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
+import styles from "./styles.module.scss";
 
 interface EmptyViewerProps {
   startEditing?: () => void;
@@ -9,10 +10,11 @@ interface EmptyViewerProps {
 
 const EmptyViewer: FC<EmptyViewerProps> = ({ startEditing }) => {
   const style = useContainerPaddings();
+  const { t } = useTranslation();
 
   return (
     <div className={styles.empty} style={style}>
-      <div className={styles.title}>Nothing's here</div>
+      <div className={styles.title}>{t(`Nothing's here yet`)}</div>
       <div>
         <Button
           onClick={startEditing}
@@ -20,7 +22,7 @@ const EmptyViewer: FC<EmptyViewerProps> = ({ startEditing }) => {
           variant="outline"
           size="small"
         >
-          Edit it
+          {t("Edit")}
         </Button>
       </div>
     </div>

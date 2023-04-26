@@ -21,4 +21,5 @@ export const SettingsContext = createContext({
   show: () => {},
   hide: () => {},
 });
+
 export const useSettings = () => useContext(SettingsContext);
