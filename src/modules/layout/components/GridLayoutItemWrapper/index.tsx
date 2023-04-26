@@ -5,8 +5,7 @@ import { IconButton } from "~/components/buttons/IconButton";
 import DeleteIcon from "~/assets/images/delete.svg";
 import SplitVertical from "~/assets/images/split-vertical.svg";
 import SplitHorizontal from "~/assets/images/split-horizontal.svg";
-import Locked from "~/assets/images/locked.svg";
-import Unlocked from "~/assets/images/unlocked.svg";
+import Gear from "~/assets/images/gear.svg";
 
 type GridLayoutItemWrapperProps = PropsWithChildren & {
   splitVertical: () => void;
@@ -24,7 +23,6 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
   showSettings,
   remove,
   locked,
-  lock,
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.menu}>
@@ -49,7 +47,7 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
         role="button"
         className={styles.button}
       >
-        S
+        <Gear />
       </IconButton>
 
       {!locked && (
@@ -57,10 +55,6 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
           <DeleteIcon />
         </IconButton>
       )}
-
-      <IconButton onClick={lock} role="button" className={styles.button}>
-        {locked ? <Locked /> : <Unlocked />}
-      </IconButton>
     </div>
 
     {children}

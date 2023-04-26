@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
+import { Button } from "~/components/buttons/Button";
 
 interface EmptyViewerProps {
   startEditing?: () => void;
@@ -13,11 +14,14 @@ const EmptyViewer: FC<EmptyViewerProps> = ({ startEditing }) => {
     <div className={styles.empty} style={style}>
       <div className={styles.title}>Nothing's here</div>
       <div>
-        <small>
-          <a href="javascript:void();" onClick={startEditing}>
-            start editing
-          </a>
-        </small>
+        <Button
+          onClick={startEditing}
+          role="button"
+          variant="outline"
+          size="small"
+        >
+          Edit it
+        </Button>
       </div>
     </div>
   );

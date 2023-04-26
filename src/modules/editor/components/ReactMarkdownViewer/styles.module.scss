@@ -1,4 +1,27 @@
 .editor {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+  padding: 10px;
+
+  .editor:hover & {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.content {
   & > :first-child {
     margin-top: 0 !important;
     margin-left: 0 !important;

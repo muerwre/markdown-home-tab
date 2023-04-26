@@ -5,6 +5,7 @@ import { usePersistedValue } from "./hooks/usePersistedValue";
 import styles from "./styles.module.scss";
 import { useSettings } from "~/modules/settings/context/SettingsContext";
 import { EmptyViewer } from "../../components/EmptyViewer";
+import { EditorWrapper } from "../../components/EditorWrapper";
 
 interface MarkdownEditorContainerProps {
   id: string;
@@ -34,14 +35,19 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   const viewer = empty ? (
     <EmptyViewer startEditing={startEditing} />
   ) : (
-    <ReactMarkdownViewer value={value} />
+    <ReactMarkdownViewer value={value} startEditing={startEditing} />
   );
 
-  const editor = richEditorEnabled ? (
-    <RichEditor value={value} onChange={setValue} locked={locked} />
-  ) : (
-    <ReactMarkdownEditor value={value} onChange={setValue} />
+  const editor = (
+    <EditorWrapper onSave={startEditing}>
+      {richEditorEnabled ? (
+        <RichEditor value={value} onChange={setValue} locked={locked} />
+      ) : (
+        <ReactMarkdownEditor value={value} onChange={setValue} />
+      )}
+    </EditorWrapper>
   );
+
   return (
     <div className={styles.editor}>
       <Suspense>{locked ? viewer : editor}</Suspense>

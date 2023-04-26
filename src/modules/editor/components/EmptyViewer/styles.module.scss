@@ -10,10 +10,10 @@
   transition: opacity 0.25s;
 
   &:hover {
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
 .title {
-  opacity: 0.5;
+  margin-bottom: 1em;
 }

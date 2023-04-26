@@ -34,6 +34,7 @@ const ReactMarkdownEditor: FC<ReactMarkdownEditorProps> = ({
       style={style}
       placeholder="Start typing here..."
       value={value}
+      rows={1}
     />
   );
 };
