@@ -6,6 +6,7 @@ import { GridLayoutItemWrapper } from "../GridLayoutItemWrapper";
 import { splitLayoutVertical } from "./utils/splitLayoutVertical";
 import { splitLayoutHorizontal } from "./utils/splitLayoutHorizontal";
 import styles from "./styles.module.scss";
+import { useSettings } from "~/modules/settings/context/SettingsContext";
 
 export interface GridLayoutProps {
   component: FC<GridLayoutComponentProps>;
@@ -22,6 +23,8 @@ const DefaultLayout = ({
   panelProps,
   persistLayout,
 }: DefaultLayoutProps) => {
+  const { show: showSettings } = useSettings();
+
   const splitVertical = useCallback(() => {
     splitLayoutVertical(panelProps.api.id, panelProps.containerApi);
   }, [panelProps.api.id, panelProps.containerApi]);
@@ -54,6 +57,7 @@ const DefaultLayout = ({
       remove={remove}
       locked={locked}
       lock={lock}
+      showSettings={showSettings}
     >
       {createElement(component, {
         id: panelProps.api.id,

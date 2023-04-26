@@ -18,9 +18,16 @@ body {
 
 a {
   color: var(--color-link);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 ul {
+  padding-left: 1em;
+
   li p {
     margin: 0.5em 0;
   }

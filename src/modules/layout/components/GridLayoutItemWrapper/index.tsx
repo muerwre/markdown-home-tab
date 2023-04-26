@@ -14,12 +14,14 @@ type GridLayoutItemWrapperProps = PropsWithChildren & {
   remove: () => void;
   locked: boolean;
   lock: () => void;
+  showSettings: () => void;
 };
 
 const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
   children,
   splitVertical,
   splitHorizontal,
+  showSettings,
   remove,
   locked,
   lock,
@@ -33,12 +35,21 @@ const GridLayoutItemWrapper: FC<GridLayoutItemWrapperProps> = ({
       >
         <SplitVertical />
       </IconButton>
+
       <IconButton
         onClick={splitHorizontal}
         role="button"
         className={styles.button}
       >
         <SplitHorizontal />
+      </IconButton>
+
+      <IconButton
+        onClick={showSettings}
+        role="button"
+        className={styles.button}
+      >
+        S
       </IconButton>
 
       {!locked && (
