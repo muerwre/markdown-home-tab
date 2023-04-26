@@ -1,7 +1,11 @@
 import { createContext, useContext } from "react";
 
-export type SettingsValue = Record<string, never>;
-export const defaultSettings: SettingsValue = {};
+export type SettingsValue = {
+  richEditorEnabled: boolean;
+};
+
+export const defaultSettings: SettingsValue = { richEditorEnabled: false };
+
 export const SettingsContext = createContext({
   settings: defaultSettings,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -63,6 +63,7 @@ const DefaultLayout = ({
         id: panelProps.api.id,
         title: panelProps.params.title,
         locked,
+        startEditing: lock,
       })}
     </GridLayoutItemWrapper>
   );
@@ -81,7 +82,7 @@ export const GridLayout: FC<GridLayoutProps> = ({ component }) => {
         />
       ),
     }),
-    [component]
+    [component, persistLayout]
   );
 
   return (
