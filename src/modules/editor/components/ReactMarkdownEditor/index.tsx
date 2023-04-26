@@ -32,9 +32,9 @@ const ReactMarkdownEditor: FC<ReactMarkdownEditorProps> = ({
       onChange={changeHandler}
       className={styles.textarea}
       style={style}
-    >
-      {value}
-    </textarea>
+      placeholder="Start typing here..."
+      value={value}
+    />
   );
 };
 
