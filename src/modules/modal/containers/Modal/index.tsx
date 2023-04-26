@@ -5,9 +5,9 @@ type ModalProps = PropsWithChildren & {
   onClose: () => void;
 };
 
-const Modal: FC<ModalProps> = ({ children }) => (
+const Modal: FC<ModalProps> = ({ children, onClose }) => (
   <div className={styles.modal}>
-    <div className={styles.overlay} />
+    <div className={styles.overlay} onClick={onClose} />
     <div className={styles.content}>
       <div className={styles.page}>{children}</div>
     </div>
