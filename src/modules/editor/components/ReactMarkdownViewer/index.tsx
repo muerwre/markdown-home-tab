@@ -4,6 +4,8 @@ import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings
 import styles from "./styles.module.scss";
 import { Button } from "~/components/buttons/Button";
 import { useTranslation } from "react-i18next";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 interface ReactMarkdownViewerProps {
   value: string;
@@ -31,7 +33,9 @@ const ReactMarkdownViewer: FC<ReactMarkdownViewerProps> = ({
       </div>
 
       <div className={styles.content}>
-        <ReactMarkdown>{value}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+          {value}
+        </ReactMarkdown>
       </div>
     </div>
   );
