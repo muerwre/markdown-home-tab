@@ -6,5 +6,8 @@
   "Background": "Фон",
   "Text": "Текст",
   "Links": "Ссылки",
-  "Colors": "Цвета"
+  "Colors": "Цвета",
+  "Inline code": "Код в строке",
+  "Ok": "Ok",
+  "Settings": "Настройки"
 }

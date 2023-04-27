@@ -54,3 +54,20 @@ pre {
     color: inherit;
   }
 }
+
+blockquote {
+  background: var(--color-pre-background);
+  margin-left: 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border-left: var(--color-border) 4px solid;
+
+  p {
+    margin: 5px 0;
+  }
+}
+
+img {
+  max-width: 100%;
+}

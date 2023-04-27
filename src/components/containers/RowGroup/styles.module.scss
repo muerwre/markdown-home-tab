@@ -1,0 +1,12 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: var(--color-border) 0 0 0 1px;
+}
+
+.row {
+  &:not(:last-child) {
+    box-shadow: var(--color-border) 0 1px;
+  }
+}

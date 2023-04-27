@@ -1,0 +1,11 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  flex: 1;
+}

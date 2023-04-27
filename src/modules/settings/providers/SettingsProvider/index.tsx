@@ -13,8 +13,12 @@ import {
   defaultDarkTheme,
   defaultLightTheme,
 } from "~/modules/theme/constants/theme";
+import { Button } from "~/components/buttons/Button";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { t } = useTranslation();
   const theme = useDetectTheme();
   const defaultColors =
     theme === Theme.Dark ? defaultDarkTheme : defaultLightTheme;
@@ -36,8 +40,14 @@ const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
     <SettingsContext.Provider value={{ settings, update, show, hide }}>
       {settingsModalVisible && (
         <Modal onClose={hide}>
-          <ModalPage onClose={hide}>
+          <ModalPage onClose={hide} title={t("Settings")}>
             <SettingsContainer />
+
+            <div className={styles.buttons}>
+              <div className={styles.filler} />
+              <Button onClick={hide}>{t("Ok")}</Button>
+              <div className={styles.filler} />
+            </div>
           </ModalPage>
         </Modal>
       )}

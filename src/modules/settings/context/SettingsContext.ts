@@ -4,6 +4,7 @@ export interface ColorSettings {
   backgroundColor: string;
   textColor: string;
   linkColor: string;
+  codeColor: string;
 }
 
 export type SettingsValue = ColorSettings & {
@@ -15,6 +16,7 @@ export const defaultSettings: SettingsValue = {
   backgroundColor: "",
   textColor: "",
   linkColor: "",
+  codeColor: "",
 };
 
 export const SettingsContext = createContext({
