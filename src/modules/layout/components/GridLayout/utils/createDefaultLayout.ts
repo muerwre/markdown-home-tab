@@ -13,5 +13,5 @@ export const createDefaultLayout = (api: DockviewApi) => {
   });
 
   // panel.group.locked = true;
-  panel.group.header.hidden = false;
+  panel.group.header.hidden = true;
 };
