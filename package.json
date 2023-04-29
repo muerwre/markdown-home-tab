@@ -11,16 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@milkdown/core": "^7.2.1",
-    "@milkdown/ctx": "^7.2.1",
-    "@milkdown/plugin-clipboard": "^7.2.1",
-    "@milkdown/plugin-listener": "^7.2.1",
-    "@milkdown/plugin-tooltip": "^7.2.1",
-    "@milkdown/preset-commonmark": "^7.2.1",
-    "@milkdown/prose": "^7.2.1",
-    "@milkdown/react": "^7.2.1",
-    "@milkdown/theme-nord": "^7.2.1",
-    "@milkdown/transformer": "^7.2.1",
     "@remirror/pm": "^2.0.4",
     "@remirror/react": "^2.0.27",
     "@remirror/react-editors": "^1.0.27",
@@ -55,6 +45,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "rollup-plugin-visualizer": "^5.9.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.0"
   }
