@@ -9,5 +9,12 @@
   "Colors": "Цвета",
   "Inline code": "Код в строке",
   "Ok": "Ok",
-  "Settings": "Настройки"
+  "Settings": "Настройки",
+  "Color theme": "Цветовая схема",
+  "Custom theme": "Своя тема",
+  "Dark theme": "Тёмная",
+  "Light theme": "Светлая",
+  "Blueberry boar": "Черничный кабанчик",
+  "User defined theme": "Пользовательская",
+  "Built-in theme": "Встроенная"
 }

@@ -6,6 +6,18 @@
   gap: 20px;
 }
 
-.title {
+.legend {
   flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.subTitle {
+  font-size: 0.8em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

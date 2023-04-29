@@ -9,5 +9,12 @@
   "Colors": "Colors",
   "Inline code": "Inline code",
   "Ok": "Ok",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "Color theme": "Color theme",
+  "Custom theme": "Custom theme",
+  "Dark theme": "Dark theme",
+  "Light theme": "Light theme",
+  "Blueberry boar": "Blueberry boar",
+  "User defined theme": "User defined",
+  "Built-in theme": "Built-in"
 }

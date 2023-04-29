@@ -1,12 +1,7 @@
 import { useCallback, useState } from "react";
-import { defaultSettings } from "../context/SettingsContext";
-import {
-  Theme,
-  defaultDarkTheme,
-  defaultLightTheme,
-} from "~/modules/theme/constants/theme";
-import { useDetectTheme } from "~/modules/theme/hooks/useDetectTheme";
 import { SettingsValue } from "~/modules/settings/context/SettingsContext";
+import { useDefaultTheme } from "~/modules/theme/hooks/useDefaultTheme";
+import { defaultSettings } from "../context/SettingsContext";
 
 const getLocalStorageSettings = (defaultValue: SettingsValue) => {
   try {
@@ -20,9 +15,7 @@ const getLocalStorageSettings = (defaultValue: SettingsValue) => {
 };
 
 export const usePersistSettings = () => {
-  const theme = useDetectTheme();
-  const defaultColors =
-    theme === Theme.Dark ? defaultDarkTheme : defaultLightTheme;
+  const defaultColors = useDefaultTheme();
 
   const [settings, setSettings] = useState<SettingsValue>(
     getLocalStorageSettings({ ...defaultSettings, ...defaultColors })

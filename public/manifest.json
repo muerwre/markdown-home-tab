@@ -1,8 +1,8 @@
 {
   "name": "Markdown Home Tab",
   "short_name": "Markdown New Tab",
-  "version": "0.0.1",
-  "description": "Makdown editor for your new tab",
+  "version": "0.0.2",
+  "description": "Markdown right in your home tab! Paste links, pictures, lists and more. You can also customize colors to match your needs.",
   "manifest_version": 2,
   "permissions": ["storage"],
   "chrome_url_overrides": {

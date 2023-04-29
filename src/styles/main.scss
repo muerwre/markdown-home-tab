@@ -28,8 +28,12 @@ a {
 ul {
   padding-left: 1em;
 
-  li p {
-    margin: 0.5em 0;
+  li {
+    margin: 5px 0;
+
+    p {
+      margin: 0.5em 0;
+    }
   }
 }
 
@@ -71,4 +75,20 @@ blockquote {
 img {
   max-width: 100%;
   max-height: 100%;
+}
+
+h1 {
+  color: var(--color-h1);
+}
+h2 {
+  color: var(--color-h2);
+}
+h3 {
+  color: var(--color-h3);
+}
+h4 {
+  color: var(--color-h4);
+}
+h5 {
+  color: var(--color-h5);
 }

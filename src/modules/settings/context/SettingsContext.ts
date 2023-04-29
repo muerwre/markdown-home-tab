@@ -5,6 +5,11 @@ export interface ColorSettings {
   textColor: string;
   linkColor: string;
   codeColor: string;
+  h1Color?: string;
+  h2Color?: string;
+  h3Color?: string;
+  h4Color?: string;
+  h5Color?: string;
 }
 
 export type SettingsValue = ColorSettings & {

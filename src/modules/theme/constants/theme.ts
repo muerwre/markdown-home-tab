@@ -10,6 +10,11 @@ export const defaultDarkTheme: ColorSettings = {
   textColor: "#eeeeee",
   linkColor: "#25bfe6",
   codeColor: "#ff3344",
+  h1Color: "",
+  h2Color: "",
+  h3Color: "",
+  h4Color: "",
+  h5Color: "",
 };
 
 export const defaultLightTheme: ColorSettings = {
@@ -17,4 +22,9 @@ export const defaultLightTheme: ColorSettings = {
   textColor: "#2e2e2e",
   linkColor: "#25bfe6",
   codeColor: "#ff3344",
+  h1Color: "",
+  h2Color: "",
+  h3Color: "",
+  h4Color: "",
+  h5Color: "",
 };

@@ -13,8 +13,11 @@ export const useThemeColors = (settings: ColorSettings) => {
 
     const code = new Color(settings.codeColor);
 
+    console.log(code.hex());
+
+    // Backgrounds and text
     document.body.style.setProperty("--color-background", background.hex());
-    document.body.style.setProperty("--color-code", code.hex());
+    document.body.style.setProperty("--color-code-text", code.hex());
     document.body.style.setProperty(
       "--color-code-background",
       code.fade(isDark ? 0.9 : 0.7).toString()
@@ -24,7 +27,16 @@ export const useThemeColors = (settings: ColorSettings) => {
     document.body.style.setProperty("--color-border", border.hex());
     document.body.style.setProperty(
       "--color-pre-background",
-      isDark ? background.lighten(0.2).hex() : background.darken(0.2).hex()
+      isDark ? background.lighten(0.2).hex() : background.darken(0.1).hex()
     );
+
+    // Headings
+    [...new Array(5)].forEach((_, i) => {
+      document.body.style.setProperty(
+        `--color-h${i + 1}`,
+        (settings as unknown as Record<string, string>)[`h${i + 1}Color`] ||
+          settings.textColor
+      );
+    });
   }, [settings]);
 };
