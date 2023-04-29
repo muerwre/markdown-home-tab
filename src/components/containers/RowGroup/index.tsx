@@ -1,18 +1,25 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useMemo } from "react";
 import styles from "./styles.module.scss";
 
 interface RowGroupProps {
-  children: ReactNode[];
+  children: ReactNode | ReactNode[];
 }
 
-const RowGroup: FC<RowGroupProps> = ({ children }) => (
-  <div className={styles.group}>
-    {children.map((item, key) => (
-      <div key={key} className={styles.row}>
-        {item}
-      </div>
-    ))}
-  </div>
-);
+const RowGroup: FC<RowGroupProps> = ({ children }) => {
+  const items = useMemo(
+    () => (Array.isArray(children) ? children : [children]),
+    [children]
+  );
+
+  return (
+    <div className={styles.group}>
+      {items.map((item, key) => (
+        <div key={key} className={styles.row}>
+          {item}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export { RowGroup };
