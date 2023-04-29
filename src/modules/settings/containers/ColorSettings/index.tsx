@@ -7,14 +7,13 @@ import {
   SettingsValue,
   useSettings,
 } from "~/modules/settings/context/SettingsContext";
-import { ThemeSelect } from "../../components/ThemeSelect";
 import { useBuiltinThemes } from "~/modules/theme/constants/themes";
-import { useDefaultTheme } from "~/modules/theme/hooks/useDefaultTheme";
+import { fillThemeHeadings } from "~/modules/theme/utils/fillThemeHeadings";
+import { ThemeSelect } from "../../components/ThemeSelect";
 
 const ColorSettings: FC = () => {
   const { update, settings } = useSettings();
   const { t } = useTranslation();
-  const defaultColors = useDefaultTheme();
 
   const setString = useCallback(
     (field: keyof SettingsValue) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,19 +27,19 @@ const ColorSettings: FC = () => {
   const currentTheme = useMemo(
     () =>
       themes.find((it) =>
-        Object.entries({ ...defaultColors, ...it.colors }).every(
+        Object.entries(fillThemeHeadings(it.colors)).every(
           ([key, value]) =>
             (settings as unknown as Record<string, string>)[key] === value
         )
       ),
-    [themes, defaultColors, settings]
+    [themes, settings]
   );
 
   const setThemeColors = useCallback(
     (val: ColorSettings) => {
-      update({ ...defaultColors, ...val });
+      update(fillThemeHeadings(val));
     },
-    [defaultColors, update]
+    [update]
   );
 
   const themeSubtitle = useMemo(() => {
@@ -57,7 +56,7 @@ const ColorSettings: FC = () => {
 
   return (
     <RowGroup>
-      <label htmlFor="theme">
+      <label>
         <SettingsRow title={t("Color theme")} subTitle={themeSubtitle}>
           <ThemeSelect
             value={currentTheme}
@@ -67,46 +66,92 @@ const ColorSettings: FC = () => {
         </SettingsRow>
       </label>
 
-      <label htmlFor="backgroundColor">
+      <label>
         <SettingsRow title={t("Background")}>
           <input
             type="color"
-            id="backgroundColor"
             onChange={setString("backgroundColor")}
             value={settings.backgroundColor}
           />
         </SettingsRow>
       </label>
 
-      <label htmlFor="textColor">
+      <label>
         <SettingsRow title={t("Text")}>
           <input
             type="color"
-            id="textColor"
             onChange={setString("textColor")}
             value={settings.textColor}
           />
         </SettingsRow>
       </label>
 
-      <label htmlFor="linkColor">
+      <label>
         <SettingsRow title={t("Links")}>
           <input
             type="color"
-            id="linkColor"
             onChange={setString("linkColor")}
             value={settings.linkColor}
           />
         </SettingsRow>
       </label>
 
-      <label htmlFor="codeColor">
+      <label>
         <SettingsRow title={t("Inline code")}>
           <input
             type="color"
-            id="codeColor"
             onChange={setString("codeColor")}
             value={settings.codeColor}
+          />
+        </SettingsRow>
+      </label>
+
+      <label>
+        <SettingsRow title={t("Heading 1")}>
+          <input
+            type="color"
+            onChange={setString("h1Color")}
+            value={settings.h1Color || settings.textColor}
+          />
+        </SettingsRow>
+      </label>
+
+      <label>
+        <SettingsRow title={t("Heading 2")}>
+          <input
+            type="color"
+            onChange={setString("h2Color")}
+            value={settings.h2Color || settings.textColor}
+          />
+        </SettingsRow>
+      </label>
+
+      <label>
+        <SettingsRow title={t("Heading 3")}>
+          <input
+            type="color"
+            onChange={setString("h3Color")}
+            value={settings.h3Color || settings.textColor}
+          />
+        </SettingsRow>
+      </label>
+
+      <label>
+        <SettingsRow title={t("Heading 4")}>
+          <input
+            type="color"
+            onChange={setString("h4Color")}
+            value={settings.h4Color || settings.textColor}
+          />
+        </SettingsRow>
+      </label>
+
+      <label>
+        <SettingsRow title={t("Heading 5")}>
+          <input
+            type="color"
+            onChange={setString("h5Color")}
+            value={settings.h5Color || settings.textColor}
           />
         </SettingsRow>
       </label>
