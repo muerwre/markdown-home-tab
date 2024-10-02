@@ -11,12 +11,16 @@ import styles from "./styles.module.scss";
 const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();
 
-  const { settings, update } = usePersistSettings();
+  const { settings, update, hydrated } = usePersistSettings();
 
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 
   const show = useCallback(() => setSettingsModalVisible(true), []);
   const hide = useCallback(() => setSettingsModalVisible(false), []);
+
+  if (!hydrated) {
+    return null;
+  }
 
   return (
     <SettingsContext.Provider value={{ settings, update, show, hide }}>

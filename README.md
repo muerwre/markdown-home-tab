@@ -6,10 +6,9 @@ Markdown Editor for new tab made with [Milkdown](https://milkdown.dev/) and
 ## Installation
 
 ```
+yarn global add web-ext
 yarn
-yarn build
-cd ./dist
-web-ext build
+yarn package
 ```
 
 ## Development

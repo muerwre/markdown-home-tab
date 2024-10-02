@@ -13,8 +13,6 @@ export const useThemeColors = (settings: ColorSettings) => {
 
     const code = new Color(settings.codeColor);
 
-    console.log(code.hex());
-
     // Backgrounds and text
     document.body.style.setProperty("--color-background", background.hex());
     document.body.style.setProperty("--color-code-text", code.hex());

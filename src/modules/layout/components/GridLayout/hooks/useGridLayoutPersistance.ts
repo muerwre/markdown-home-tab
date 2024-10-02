@@ -1,27 +1,30 @@
-import { DockviewApi, DockviewReadyEvent } from "dockview";
-import { useCallback, useEffect, useRef } from "react";
+import { DockviewApi, DockviewReadyEvent, SerializedDockview } from "dockview";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createDefaultLayout } from "../utils/createDefaultLayout";
+import { BrowserSyncStorage } from "~/utils";
+
+const storage = new BrowserSyncStorage();
+const key = 'dockview_persistance_layout';
 
 export const useGridLayoutPersistance = () => {
   const api = useRef<DockviewApi>();
+  const [hydrated, setHydrated] = useState(false);
 
   const onReady = (event: DockviewReadyEvent) => {
     api.current = event.api;
 
-    const layoutString = localStorage.getItem("dockview_persistance_layout");
+    storage.get<SerializedDockview>(key).then(layout => {
+      if (!layout) {
+        throw new Error("No layout saved, its okay");
+      }
 
-    if (!layoutString) {
-      createDefaultLayout(event.api);
-      return;
-    }
-
-    try {
-      const layout = JSON.parse(layoutString);
       event.api.fromJSON(layout);
-    } catch (err) {
-      console.log(err);
+    }).catch(() => {
       createDefaultLayout(event.api);
-    }
+      
+    }).finally(() => {
+      setHydrated(true);
+    });
   };
 
   const persistLayout = useCallback(() => {
@@ -29,18 +32,12 @@ export const useGridLayoutPersistance = () => {
       return;
     }
 
-    const layout = api.current.toJSON();
-
-    localStorage.setItem("dockview_persistance_layout", JSON.stringify(layout));
+    storage.set(key, api.current.toJSON());
   }, []);
 
   useEffect(() => {
-    if (!api.current) {
-      return;
-    }
-
-    const onLayoutChange = api.current.onDidLayoutChange(() => {
-      if (!api.current) {
+    const onLayoutChange = api.current?.onDidLayoutChange(() => {
+      if (!api.current || !hydrated) {
         return;
       }
 
@@ -51,11 +48,8 @@ export const useGridLayoutPersistance = () => {
       persistLayout();
     });
 
-    return () => {
-      onLayoutChange.dispose();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [persistLayout, api.current]);
+    return onLayoutChange?.dispose;
+  }, [persistLayout, hydrated]);
 
-  return { api, onReady, persistLayout };
+  return { api, onReady, persistLayout, hydrated };
 };

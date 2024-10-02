@@ -1,35 +1,26 @@
-import { useEffect, useState } from "react";
-
-const safelyGetStringValue = (key: string) => {
-  try {
-    return localStorage.getItem(key) ?? "";
-  } catch (error) {
-    console.warn(error);
-    return "";
-  }
-};
-const safelySetStringValue = (key: string, value: string) => {
-  try {
-    return localStorage.setItem(key, value);
-  } catch (error) {
-    console.warn(error);
-  }
-};
+import { useEffect, useMemo, useState } from "react";
+import { BrowserSyncStorage } from '~/utils/index';
 
 export const usePersistedValue = (
   id: string,
   prefix: string
-): [string, (val: string) => void] => {
+) => {
+  const [hydrated, setHydrated] = useState(false);
+  const storage = useMemo(() => new BrowserSyncStorage(prefix), [prefix]);
   const key = `${prefix}${id}`;
-  const [value, setValue] = useState(safelyGetStringValue(key));
+  const [value, setValue] = useState('');
 
   useEffect(() => {
-    setValue(safelyGetStringValue(key));
-  }, [id, key]);
+    storage.get<string>(key).then(val => setValue(val ?? '')).finally(() => setHydrated(true));
+  }, [key, storage]);
 
   useEffect(() => {
-    safelySetStringValue(key, value);
-  }, [key, value]);
+    if (!hydrated) {
+      return;
+    }
 
-  return [value, setValue];
+    storage.set(key, value);
+  }, [key, value, storage, hydrated]);
+
+  return { value, setValue, hydrated };
 };

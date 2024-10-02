@@ -30,7 +30,10 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
     settings: { richEditorEnabled },
   } = useSettings();
 
-  const [value, setValue] = usePersistedValue(id, "MarkdownEditorContainer");
+  const { value, setValue, hydrated } = usePersistedValue(
+    id,
+    "MarkdownEditorContainer"
+  );
 
   const empty = !value.trim();
 
@@ -52,7 +55,7 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
 
   return (
     <div className={styles.editor}>
-      <Suspense>{locked ? viewer : editor}</Suspense>
+      {hydrated && <Suspense>{locked ? viewer : editor}</Suspense>}
     </div>
   );
 };

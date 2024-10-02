@@ -27,6 +27,6 @@
     },
     "types": ["./src/vite-env.d.ts", "./src/i18next.d.ts"]
   },
-  "include": ["src", "public/locales"],
+  "include": ["src", "public/locales", "./node_modules/@types/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
