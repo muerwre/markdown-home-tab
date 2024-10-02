@@ -13,7 +13,7 @@ const EmptyViewer: FC<EmptyViewerProps> = ({ startEditing }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.empty} style={style}>
+    <div className={styles.empty} style={style} onDoubleClick={startEditing}>
       <div className={styles.title}>{t(`Nothing's here yet`)}</div>
       <div>
         <Button

@@ -1,13 +1,15 @@
-import { ChangeEvent, FC, useCallback, useMemo } from "react";
+import { ChangeEvent, FC, useCallback, useMemo, KeyboardEvent } from "react";
 import styles from "./styles.module.scss";
 import { useTheme } from "~/modules/theme/context/ThemeContext";
 
 interface ReactMarkdownEditorProps {
   value: string;
   onChange: (val: string) => void;
+  save: VoidFunction;
 }
 
-const ReactMarkdownEditor: FC<ReactMarkdownEditorProps> = ({
+const SimpleTextareaEditor: FC<ReactMarkdownEditorProps> = ({
+  save,
   value,
   onChange,
 }) => {
@@ -27,8 +29,22 @@ const ReactMarkdownEditor: FC<ReactMarkdownEditorProps> = ({
     [paddingHorizontal, paddingVertical]
   );
 
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter" && event.ctrlKey) {
+        save();
+      }
+
+      if (event.key === "Escape") {
+        save();
+      }
+    },
+    [save]
+  );
+
   return (
     <textarea
+      onKeyDown={onKeyDown}
       onChange={changeHandler}
       className={styles.textarea}
       style={style}
@@ -39,4 +55,4 @@ const ReactMarkdownEditor: FC<ReactMarkdownEditorProps> = ({
   );
 };
 
-export { ReactMarkdownEditor };
+export { SimpleTextareaEditor };

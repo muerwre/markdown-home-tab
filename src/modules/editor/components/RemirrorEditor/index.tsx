@@ -1,37 +1,16 @@
 import { FC, useCallback } from "react";
 
 import {
+  EditorComponent,
   FloatingToolbar,
+  FormattingButtonGroup,
+  HeadingLevelButtonGroup,
   Remirror,
   useRemirror,
-  EditorComponent,
-  HeadingLevelButtonGroup,
-  FormattingButtonGroup,
 } from "@remirror/react";
-import jsx from "refractor/lang/jsx.js";
-import typescript from "refractor/lang/typescript.js";
-import { Extension, ExtensionPriority, RemirrorEventListener } from "remirror";
-import {
-  BlockquoteExtension,
-  UnderlineExtension,
-  BoldExtension,
-  BulletListExtension,
-  CodeBlockExtension,
-  CodeExtension,
-  HardBreakExtension,
-  HeadingExtension,
-  ItalicExtension,
-  LinkExtension,
-  ListItemExtension,
-  MarkdownExtension,
-  OrderedListExtension,
-  StrikeExtension,
-  TableExtension,
-  TrailingNodeExtension,
-  GapCursorExtension,
-} from "remirror/extensions";
-import styles from "./styles.module.scss";
+import { Extension, RemirrorEventListener } from "remirror";
 import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
+import styles from "./styles.module.scss";
 
 interface RemirrorEditorProps {
   locked: boolean;
@@ -50,7 +29,7 @@ const RemirrorEditor: FC<RemirrorEditorProps> = ({
       exitMarksOnArrowPress: false,
     },
     content: value,
-    stringHandler: "markdown",
+    // stringHandler: "markdown",
   });
 
   const onStateChange = useCallback<RemirrorEventListener<Extension>>(
@@ -90,26 +69,26 @@ const RemirrorEditor: FC<RemirrorEditorProps> = ({
 };
 
 const extensions = (): Extension[] => [
-  new LinkExtension({ autoLink: true }),
-  new BoldExtension(),
-  new UnderlineExtension(),
-  new StrikeExtension(),
-  new ItalicExtension(),
-  new HeadingExtension(),
-  new BlockquoteExtension(),
-  new BulletListExtension({ enableSpine: false }),
-  new OrderedListExtension(),
-  new ListItemExtension({
-    priority: ExtensionPriority.High,
-    // enableCollapsible: true,
-  }),
-  new CodeExtension(),
-  new CodeBlockExtension({ supportedLanguages: [jsx, typescript] }),
-  new TrailingNodeExtension(),
-  new TableExtension(),
-  new MarkdownExtension({ copyAsMarkdown: true }),
-  new GapCursorExtension(),
-  new HardBreakExtension(),
+  // new LinkExtension({ autoLink: true }),
+  // new BoldExtension(),
+  // new UnderlineExtension(),
+  // new StrikeExtension(),
+  // new ItalicExtension(),
+  // new HeadingExtension(),
+  // new BlockquoteExtension(),
+  // new BulletListExtension({ enableSpine: false }),
+  // new OrderedListExtension(),
+  // new ListItemExtension({
+  //   priority: ExtensionPriority.High,
+  //   // enableCollapsible: true,
+  // }),
+  // new CodeExtension(),
+  // new CodeBlockExtension({ supportedLanguages: [jsx, typescript] }),
+  // new TrailingNodeExtension(),
+  // new TableExtension(),
+  // new MarkdownExtension({ copyAsMarkdown: true }),
+  // new GapCursorExtension(),
+  // new HardBreakExtension(),
 ];
 
 export { RemirrorEditor };

@@ -1,12 +1,12 @@
 {
   "name": "markdown-home-tab",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "package": "yarn build && web-ext build -s ./dist",
+    "package": "yarn build && web-ext build -s ./dist -a ./output",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

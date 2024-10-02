@@ -22,4 +22,4 @@ yarn dev
 
 ## TO-DO
 
-- Use Remirror as editor
+- Use HyperMD editor

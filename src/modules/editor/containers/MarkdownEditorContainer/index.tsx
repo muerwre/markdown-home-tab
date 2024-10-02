@@ -1,6 +1,6 @@
 import { FC, Suspense, lazy } from "react";
-import { ReactMarkdownEditor } from "../../components/ReactMarkdownEditor";
-import { ReactMarkdownViewer } from "../../components/ReactMarkdownViewer";
+import { SimpleTextareaEditor } from "../../components/SimpleTextareaEditor";
+import { MarkdownViewer } from "../../components/MarkdownViewer";
 import { usePersistedValue } from "./hooks/usePersistedValue";
 import styles from "./styles.module.scss";
 import { useSettings } from "~/modules/settings/context/SettingsContext";
@@ -10,8 +10,8 @@ import { EditorWrapper } from "../../components/EditorWrapper";
 interface MarkdownEditorContainerProps {
   id: string;
   locked: boolean;
-  startEditing: () => void;
-  remove: () => void;
+  startEditing: VoidCallback;
+  remove: VoidCallback;
 }
 
 const RichEditor = lazy(() =>
@@ -40,7 +40,7 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   const viewer = empty ? (
     <EmptyViewer startEditing={startEditing} />
   ) : (
-    <ReactMarkdownViewer value={value} startEditing={startEditing} />
+    <MarkdownViewer value={value} startEditing={startEditing} />
   );
 
   const editor = (
@@ -48,13 +48,17 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
       {richEditorEnabled ? (
         <RichEditor value={value} onChange={setValue} locked={locked} />
       ) : (
-        <ReactMarkdownEditor value={value} onChange={setValue} />
+        <SimpleTextareaEditor
+          value={value}
+          onChange={setValue}
+          save={startEditing}
+        />
       )}
     </EditorWrapper>
   );
 
   return (
-    <div className={styles.editor}>
+    <div className={styles.editor} id={id}>
       {hydrated && <Suspense>{locked ? viewer : editor}</Suspense>}
     </div>
   );

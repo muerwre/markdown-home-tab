@@ -44,6 +44,15 @@ const DefaultLayout = ({
       ...panelProps.params,
       locked: !locked,
     });
+
+    if (panelProps.params.locked) {
+      setTimeout(() => {
+        document
+          .getElementById(panelProps.api.id)
+          ?.querySelector("textarea")
+          ?.focus();
+      }, 0);
+    }
   }, [locked, panelProps.api, panelProps.params]);
 
   useEffect(() => {

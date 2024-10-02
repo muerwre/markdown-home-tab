@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { RowGroup } from "~/components/containers/RowGroup";
 import { SettingsRow } from "~/components/containers/SettingsRow";
 import {
-  ColorSettings,
+  ColorSettings as ColorSettingsValue,
   SettingsValue,
   useSettings,
 } from "~/modules/settings/context/SettingsContext";
@@ -37,7 +37,7 @@ const ColorSettings: FC = () => {
   );
 
   const setThemeColors = useCallback(
-    (val: ColorSettings) => {
+    (val: ColorSettingsValue) => {
       update(fillThemeHeadings(val));
     },
     [update]

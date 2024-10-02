@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, MouseEvent } from "react";
 import ReactMarkdown from "react-markdown";
 import { useContainerPaddings } from "~/modules/theme/hooks/useContainerPaddings";
 import styles from "./styles.module.scss";
@@ -7,20 +7,26 @@ import { useTranslation } from "react-i18next";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
-interface ReactMarkdownViewerProps {
+interface Props {
   value: string;
   startEditing: () => void;
 }
 
-const ReactMarkdownViewer: FC<ReactMarkdownViewerProps> = ({
-  value,
-  startEditing,
-}) => {
+const MarkdownViewer: FC<Props> = ({ value, startEditing }) => {
   const { t } = useTranslation();
   const style = useContainerPaddings();
 
+  const onDoubleClick = useCallback(
+    (event: MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      startEditing();
+    },
+    [startEditing]
+  );
+
   return (
-    <div style={style} className={styles.editor}>
+    <div style={style} className={styles.editor} onDoubleClick={onDoubleClick}>
       <div className={styles.edit}>
         <Button
           size="small"
@@ -41,4 +47,4 @@ const ReactMarkdownViewer: FC<ReactMarkdownViewerProps> = ({
   );
 };
 
-export { ReactMarkdownViewer };
+export { MarkdownViewer };
