@@ -1,11 +1,13 @@
+import { hasBrowserStorage, hasChromeStorage } from "./storage";
+
 export class BrowserSyncStorage {
   constructor(private globalPrefix = "") {}
 
   get engine() {
-    if (typeof browser !== 'undefined' && browser?.storage) {
-      return "browser"
-    } else if (typeof chrome !== 'undefined' && chrome?.storage) {
-      return "chrome"
+    if (hasBrowserStorage()) {
+      return "browser";
+    } else if (hasChromeStorage()) {
+      return "chrome";
     }
 
     return "local";
@@ -15,20 +17,20 @@ export class BrowserSyncStorage {
 
   set = async <T>(key: string, value: T) => {
     switch (this.engine) {
-      case 'browser':
+      case "browser":
         await browser.storage.sync.set({ [this.makeKey(key)]: value });
         return;
-      case 'chrome':
+      case "chrome":
         await chrome.storage.sync.set({ [this.makeKey(key)]: value });
         return;
       default:
         localStorage.setItem(this.makeKey(key), JSON.stringify(value));
-        return
+        return;
     }
   };
 
   get = async <T>(key: string): Promise<T | undefined> => {
-    if (this.engine === 'browser') {
+    if (this.engine === "browser") {
       const value = await browser.storage.sync
         .get([this.makeKey(key)])
         .then((result) => result[this.makeKey(key)] as T | undefined);
@@ -36,10 +38,10 @@ export class BrowserSyncStorage {
       if (value) {
         return value;
       }
-    } else if (this.engine === 'chrome') {
-      const value = await chrome.storage.sync.get(this.makeKey(key)).then(
-        (result) => result[this.makeKey(key)] as T | undefined
-      );
+    } else if (this.engine === "chrome") {
+      const value = await chrome.storage.sync
+        .get(this.makeKey(key))
+        .then((result) => result[this.makeKey(key)] as T | undefined);
 
       if (value) {
         return value;

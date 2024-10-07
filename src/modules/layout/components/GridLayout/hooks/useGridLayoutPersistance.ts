@@ -1,30 +1,27 @@
-import { DockviewApi, DockviewReadyEvent, SerializedDockview } from "dockview";
+import { DockviewApi, DockviewReadyEvent } from "dockview";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useStorage } from "../../../../../modules/storage/StorageContext";
 import { createDefaultLayout } from "../utils/createDefaultLayout";
-import { BrowserSyncStorage } from "~/utils";
-
-const storage = new BrowserSyncStorage();
-const key = 'dockview_persistance_layout';
 
 export const useGridLayoutPersistance = () => {
   const api = useRef<DockviewApi>();
   const [hydrated, setHydrated] = useState(false);
+  const { layout, setLayout } = useStorage();
 
   const onReady = (event: DockviewReadyEvent) => {
+    if (hydrated) {
+      return;
+    }
+
     api.current = event.api;
 
-    storage.get<SerializedDockview>(key).then(layout => {
-      if (!layout) {
-        throw new Error("No layout saved, its okay");
-      }
-
-      event.api.fromJSON(layout);
-    }).catch(() => {
+    if (!layout) {
       createDefaultLayout(event.api);
-      
-    }).finally(() => {
-      setHydrated(true);
-    });
+      return;
+    }
+
+    event.api.fromJSON(layout);
+    setHydrated(true);
   };
 
   const persistLayout = useCallback(() => {
@@ -32,8 +29,8 @@ export const useGridLayoutPersistance = () => {
       return;
     }
 
-    storage.set(key, api.current.toJSON());
-  }, []);
+    setLayout(api.current.toJSON());
+  }, [setLayout]);
 
   useEffect(() => {
     const onLayoutChange = api.current?.onDidLayoutChange(() => {

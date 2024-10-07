@@ -12,6 +12,9 @@ interface Props {
   startEditing: () => void;
 }
 
+const remarkPlugins = [remarkGfm];
+const rehypePlugins = [rehypeRaw];
+
 const MarkdownViewer: FC<Props> = ({ value, startEditing }) => {
   const { t } = useTranslation();
   const style = useContainerPaddings();
@@ -39,9 +42,11 @@ const MarkdownViewer: FC<Props> = ({ value, startEditing }) => {
       </div>
 
       <div className={styles.content}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-          {value}
-        </ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={remarkPlugins}
+          rehypePlugins={rehypePlugins}
+          children={value}
+        />
       </div>
     </div>
   );
