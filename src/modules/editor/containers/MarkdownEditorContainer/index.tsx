@@ -5,6 +5,7 @@ import { MarkdownViewer } from "../../components/MarkdownViewer";
 import { SimpleTextareaEditor } from "../../components/SimpleTextareaEditor";
 import styles from "./styles.module.scss";
 import { useStorage } from "../../../../modules/storage/StorageContext";
+import { HyperEditor } from "../../components/HyperEditor";
 
 interface MarkdownEditorContainerProps {
   id: string;
@@ -12,6 +13,8 @@ interface MarkdownEditorContainerProps {
   startEditing: VoidCallback;
   remove: VoidCallback;
 }
+
+const enableCoolEditor = true;
 
 export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
   id,
@@ -37,11 +40,15 @@ export const MarkdownEditorContainer: FC<MarkdownEditorContainerProps> = ({
 
   const editor = (
     <EditorWrapper save={startEditing} remove={remove}>
-      <SimpleTextareaEditor
-        value={value}
-        onChange={onChange}
-        save={startEditing}
-      />
+      {enableCoolEditor ? (
+        <HyperEditor value={value} onChange={onChange} />
+      ) : (
+        <SimpleTextareaEditor
+          value={value}
+          onChange={onChange}
+          save={startEditing}
+        />
+      )}
     </EditorWrapper>
   );
 

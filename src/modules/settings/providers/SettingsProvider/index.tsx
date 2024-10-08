@@ -5,7 +5,7 @@ import { ModalPage } from "~/modules/modal/components/ModalPage";
 import { Modal } from "~/modules/modal/containers/Modal";
 import { SettingsContainer } from "../../containers/SettingsContainer";
 import { SettingsContext } from "../../context/SettingsContext";
-import { useSettings } from "../../hooks/useSettings";
+import { useSettings } from "../../hooks/usePersistSettings";
 import styles from "./styles.module.scss";
 
 const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
