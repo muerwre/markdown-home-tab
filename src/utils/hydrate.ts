@@ -1,12 +1,15 @@
 import { SerializedDockview } from "dockview";
+import { SettingsValue } from "~/modules/settings/context/SettingsContext";
 import { hasBrowserStorage, hasChromeStorage } from "~/utils/storage";
 
 interface Result {
   layout: SerializedDockview;
   panels: Record<string, string>;
+  settings: Partial<SettingsValue>;
 }
 
 const layoutKey = "dockview_persistance_layout";
+const settingsKey = "settings";
 const panelPrefix = "MarkdownEditorContainerMarkdownEditorContainer";
 
 const makePanelKey = (uuid: string) => `${panelPrefix}${uuid}`;
@@ -27,9 +30,16 @@ const getFromBrowserStorage = async (): Promise<Result | null> => {
     {} as Record<string, string>
   );
 
+  const settings =
+    typeof result[settingsKey] === "object" &&
+    Object.keys(result[settingsKey]).length
+      ? result[settingsKey]
+      : {};
+
   return {
     layout,
     panels,
+    settings,
   };
 };
 
@@ -49,9 +59,16 @@ const getFromChromeStorage = async (): Promise<Result | null> => {
     {} as Record<string, string>
   );
 
+  const settings =
+    typeof result[settingsKey] === "object" &&
+    Object.keys(result[settingsKey]).length
+      ? result[settingsKey]
+      : {};
+
   return {
     layout,
     panels,
+    settings,
   };
 };
 
@@ -76,9 +93,20 @@ const getFromLocalStorage = () => {
     {} as Record<string, string>
   );
 
+  const rawSettings = localStorage.getItem(settingsKey);
+  const parsedSettings =
+    rawSettings && (JSON.parse(rawSettings) as Partial<SettingsValue>);
+  const settings =
+    parsedSettings &&
+    typeof parsedSettings === "object" &&
+    Object.keys(parsedSettings).length
+      ? parsedSettings
+      : {};
+
   return {
     layout,
     panels,
+    settings,
   };
 };
 
@@ -123,5 +151,18 @@ export const storePanelInSync = (uuid: string, value: string) => {
 
   if (hasChromeStorage()) {
     return chrome.storage.sync.set({ [`${panelPrefix}${uuid}`]: value });
+  }
+};
+
+export const storeSettingsLocally = (settings: Partial<SettingsValue>) =>
+  localStorage.setItem(settingsKey, JSON.stringify(settings));
+
+export const storeSettingsInSync = (settings: Partial<SettingsValue>) => {
+  if (hasBrowserStorage()) {
+    return browser.storage.sync.set({ [settingsKey]: settings });
+  }
+
+  if (hasChromeStorage()) {
+    return chrome.storage.sync.set({ [settingsKey]: settings });
   }
 };

@@ -4,9 +4,11 @@ import {
   hydrateLayout,
   storeLayoutLocally,
   storePanelLocally,
+  storeSettingsLocally,
 } from "~/utils/hydrate";
 import { useDelayedSync } from "./hooks/useDelayedSync";
 import { StorageContext } from "./StorageContext";
+import { SettingsValue } from "~/modules/settings/context/SettingsContext";
 
 const debounceDelay = 500;
 
@@ -14,8 +16,10 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
   const [hydrated, setHydrated] = useState(false);
   const [layout, setLayoutValue] = useState<SerializedDockview | null>(null);
   const [panels, setPanelsValue] = useState<Record<string, string>>({});
+  const [settings, setSettingsValue] = useState<Partial<SettingsValue>>({});
 
-  const { storeLayout, storePanel } = useDelayedSync(debounceDelay);
+  const { storeLayout, storePanel, storeSettings } =
+    useDelayedSync(debounceDelay);
 
   const setPanel = useCallback(
     (uuid: string, value: string) => {
@@ -35,6 +39,12 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
     [storeLayout]
   );
 
+  const setSettings = useCallback((value: Partial<SettingsValue>) => {
+    setSettingsValue(value);
+    storeSettingsLocally(value);
+    storeSettings(value);
+  }, []);
+
   useEffect(() => {
     if (hydrated) {
       return;
@@ -47,6 +57,7 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
         }
 
         setLayout(result.layout);
+        setSettings(result.settings);
 
         Object.entries(result.panels).forEach(([uuid, value]) => {
           setPanel(uuid, value);
@@ -55,11 +66,19 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
       .finally(() => {
         setHydrated(true);
       });
-  }, [hydrated, setLayout, setPanel]);
+  }, [hydrated, setLayout, setPanel, setSettings]);
 
   return (
     <StorageContext.Provider
-      value={{ hydrated, layout, panels, setLayout, setPanel }}
+      value={{
+        hydrated,
+        layout,
+        panels,
+        settings,
+        setLayout,
+        setPanel,
+        setSettings,
+      }}
     >
       {hydrated ? children : null}
     </StorageContext.Provider>

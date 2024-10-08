@@ -1,11 +1,17 @@
 import { useCallback, useRef } from "react";
-import { storeLayoutInSync, storePanelInSync } from "~/utils/hydrate";
+import {
+  storeLayoutInSync,
+  storePanelInSync,
+  storeSettingsInSync,
+} from "~/utils/hydrate";
 import { DebouncedFunc } from "lodash";
 import { SerializedDockview } from "dockview";
 import debounce from "lodash.debounce";
+import { SettingsValue } from "~/modules/settings/context/SettingsContext";
 
 export const useDelayedSync = (debounceDelay: number) => {
   const layoutTimer = useRef<DebouncedFunc<typeof storeLayoutInSync>>();
+  const settingsTimer = useRef<DebouncedFunc<typeof storeSettingsInSync>>();
   const panelTimers = useRef<
     Record<string, DebouncedFunc<typeof storePanelInSync>>
   >({});
@@ -34,5 +40,16 @@ export const useDelayedSync = (debounceDelay: number) => {
     [debounceDelay]
   );
 
-  return { storeLayout, storePanel };
+  const storeSettings = useCallback(
+    (settings: Partial<SettingsValue>) => {
+      if (settingsTimer.current) {
+        settingsTimer.current.cancel();
+      }
+
+      settingsTimer.current = debounce(storeSettingsInSync, debounceDelay);
+      settingsTimer.current(settings);
+    },
+    [debounceDelay]
+  );
+  return { storeLayout, storePanel, storeSettings };
 };

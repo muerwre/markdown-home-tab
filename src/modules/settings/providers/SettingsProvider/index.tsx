@@ -5,22 +5,18 @@ import { ModalPage } from "~/modules/modal/components/ModalPage";
 import { Modal } from "~/modules/modal/containers/Modal";
 import { SettingsContainer } from "../../containers/SettingsContainer";
 import { SettingsContext } from "../../context/SettingsContext";
-import { usePersistSettings } from "../../hooks/usePersistSettings";
+import { useSettings } from "../../hooks/useSettings";
 import styles from "./styles.module.scss";
 
 const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();
 
-  const { settings, update, hydrated } = usePersistSettings();
+  const { settings, update } = useSettings();
 
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 
   const show = useCallback(() => setSettingsModalVisible(true), []);
   const hide = useCallback(() => setSettingsModalVisible(false), []);
-
-  if (!hydrated) {
-    return null;
-  }
 
   return (
     <SettingsContext.Provider value={{ settings, update, show, hide }}>

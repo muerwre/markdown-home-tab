@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { noop } from "~/utils/noop";
 
 export interface ColorSettings {
   backgroundColor: string;
@@ -26,10 +27,9 @@ export const defaultSettings: SettingsValue = {
 
 export const SettingsContext = createContext({
   settings: defaultSettings,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update: (_: Partial<SettingsValue>) => {},
-  show: () => {},
-  hide: () => {},
+  update: noop as (value: Partial<SettingsValue>) => void,
+  show: noop,
+  hide: noop,
 });
 
 export const useSettings = () => useContext(SettingsContext);
