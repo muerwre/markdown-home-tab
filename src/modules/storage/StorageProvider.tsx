@@ -10,7 +10,7 @@ import { useDelayedSync } from "./hooks/useDelayedSync";
 import { StorageContext } from "./StorageContext";
 import { SettingsValue } from "~/modules/settings/context/SettingsContext";
 
-const debounceDelay = 500;
+const debounceDelay = 3000;
 
 export const StorageProvider = ({ children }: { children: ReactNode }) => {
   const [hydrated, setHydrated] = useState(false);
