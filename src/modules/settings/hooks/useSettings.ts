@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useStorage } from "~/modules/storage/StorageContext";
 import { useDefaultTheme } from "~/modules/theme/hooks/useDefaultTheme";
-import { defaultSettings } from "../context/SettingsContext";
+import { defaultSettings, SettingsValue } from "../context/SettingsContext";
 
 export const useSettings = () => {
   const defaultColors = useDefaultTheme();
@@ -13,5 +13,12 @@ export const useSettings = () => {
     [defaultColors, storedSettings]
   );
 
-  return { settings, update: setSettings };
+  const update = useCallback(
+    (value: Partial<SettingsValue>) => {
+      setSettings({ ...settings, ...value });
+    },
+    [setSettings, settings]
+  );
+
+  return { settings, update };
 };
